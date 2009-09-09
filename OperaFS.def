@@ -1,0 +1,23 @@
+LIBRARY	"OperaFS.wfx"
+EXPORTS
+	FsInit
+	FsFindFirst
+	FsFindNext
+	FsFindClose
+	
+	FsGetDefRootName
+	FsSetDefaultParams
+	FsExtractCustomIcon
+	
+	FsContentGetSupportedField
+	FsContentGetDefaultView
+	FsContentGetValue
+	FsContentPluginUnloading
+	
+	FsPutFile
+	FsGetFile
+	
+	FsDeleteFile
+	FsRemoveDir
+	
+	FsExecuteFile
