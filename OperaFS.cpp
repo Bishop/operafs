@@ -894,6 +894,7 @@ OPERAFS_API BOOL FsContentGetDefaultView(char* ViewContents, char* ViewHeaders, 
 OPERAFS_API int FsContentGetValue(char* FileName, int FieldIndex, int UnitIndex, void* FieldValue, int maxlen, int flags)
 {
 	ONode *node = GetNode(FileName);
+	if (!node) return ft_nosuchfield;
 	flags = 0;
 	int result = ft_nosuchfield;
 	FILETIME *ft = (FILETIME *)FieldValue;
