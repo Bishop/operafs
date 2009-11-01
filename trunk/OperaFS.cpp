@@ -72,6 +72,7 @@ inline ONode *NewNode(ONode *parent, ONode *prev)
 
 void OVerifyFile(const char *path)
 {
+	HANDLE hFile=INVALID_HANDLE_VALUE;
 	char nodepath[MAX_PATH];
 	strncpy_s(nodepath, MAX_PATH, path, MAX_PATH - 1);
 	char *pt = nodepath;
@@ -81,15 +82,17 @@ void OVerifyFile(const char *path)
 	if (--pt)
 		*pt = 0;
 	ONode *node = GetNode(nodepath);
-	HANDLE hFile = CreateFile(node->Url, GENERIC_READ, FILE_SHARE_READ,
-		NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
-	if (hFile)
+	if (node)
 	{
-		FILETIME ft;
-		GetFileTime(hFile, NULL, NULL, &ft);
-		CloseHandle(hFile);
-		if (CompareFileTime(&ft, &node->Created) == 1)
-			OCreateTree();
+		hFile = CreateFile(node->Url, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+		if (hFile!=INVALID_HANDLE_VALUE)
+		{
+			FILETIME ft;
+			GetFileTime(hFile, NULL, NULL, &ft);
+			CloseHandle(hFile);
+			if (CompareFileTime(&ft, &node->Created) == 1)
+				OCreateTree();
+		}
 	}
 }
 
