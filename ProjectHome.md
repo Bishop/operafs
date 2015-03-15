@@ -1,0 +1,1 @@
+OperaFS — plugin for Total Commander to view Opera bookmarks
